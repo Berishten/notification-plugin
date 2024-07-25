@@ -38,7 +38,7 @@ Crear un plugin de notificación en Java que permita:
 
 ## Pasos a seguir
 1. Configuración del Proyecto: 
-    - [ ] Configura el entorno de desarrollo con Java 11 y crear un nuevo proyecto Java. Usaré Maven o Gradle como herramienta de construcción.
+    - [x] Configura el entorno de desarrollo con Java 11 y crear un nuevo proyecto Java. Usaré Maven o Gradle como herramienta de construcción.
 2. Estructura del Plugin:
     - [ ] Definir la estructura del plugin basada en los ejemplos de los enlaces proporcionados.
 3. Implementación de Funcionalidad:
