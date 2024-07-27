@@ -1,6 +1,9 @@
-package com.beridevs;
+package com.beridevs.Services;
 
 import java.io.IOException;
+
+import com.beridevs.Constants.ContentType;
+import com.beridevs.Constants.HttpMethod;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

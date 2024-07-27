@@ -1,4 +1,4 @@
-package com.beridevs;
+package com.beridevs.Constants;
 
 import java.util.Arrays;
 

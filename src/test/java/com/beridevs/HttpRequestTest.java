@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.beridevs.Constants.ContentType;
+import com.beridevs.Constants.HttpMethod;
+import com.beridevs.Services.HttpRequest;
+
 import java.io.IOException;
 
 import okhttp3.*;

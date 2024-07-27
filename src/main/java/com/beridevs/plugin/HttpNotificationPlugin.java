@@ -7,9 +7,9 @@ import java.util.TreeMap;
 
 import org.rundeck.app.spi.Services;
 
-import com.beridevs.ContentType;
-import com.beridevs.HttpMethod;
-import com.beridevs.HttpRequest;
+import com.beridevs.Constants.ContentType;
+import com.beridevs.Constants.HttpMethod;
+import com.beridevs.Services.HttpRequest;
 import com.dtolabs.rundeck.core.plugins.Plugin;
 import com.dtolabs.rundeck.core.plugins.configuration.DynamicProperties;
 import com.dtolabs.rundeck.core.plugins.configuration.StringRenderingConstants;
