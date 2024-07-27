@@ -56,9 +56,9 @@
           <configuration>
               <archive>
                   <manifestEntries>
-                      <Rundeck-Plugin-Version>1.0</Rundeck-Plugin-Version>
+                      <Rundeck-Plugin-Version>1.2</Rundeck-Plugin-Version>
                       <Rundeck-Plugin-Archive>true</Rundeck-Plugin-Archive>
-                      <Rundeck-Plugin-Classnames>com.beridevs.NotificationPlugin</Rundeck-Plugin-Classnames>
+                      <Rundeck-Plugin-Classnames>com.beridevs.plugin.HttpNotificationPlugin</Rundeck-Plugin-Classnames>
                       <Rundeck-Plugin-Author>beridevs</Rundeck-Plugin-Author>
                       <Rundeck-Plugin-File-Version>1.0</Rundeck-Plugin-File-Version>
                   </manifestEntries>
