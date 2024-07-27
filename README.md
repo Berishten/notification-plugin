@@ -4,10 +4,10 @@ Desarrollar un plugin de notificación en Java para Rundeck, capaz de realizar s
 
 ### Tarea
 Crear un plugin de notificación en Java que permita:
-- Seleccionar el método HTTP (GET, POST, PUT, DELETE, etc.).
-- Definir el contenido del cuerpo (body content) y el tipo de contenido (content type) si es necesario para el método HTTP.
-- No debe usar HttpURLConnection; en su lugar, debe utilizar una biblioteca externa para manejar las solicitudes HTTP.
-- Compilar y ejecutar con Java 11.
+- [x] Seleccionar el método HTTP (GET, POST, PUT, DELETE, etc.).
+- [x] Definir el contenido del cuerpo (body content) y el tipo de contenido (content type) si es necesario para el método HTTP.
+- [x] No debe usar HttpURLConnection; en su lugar, debe utilizar una biblioteca externa para manejar las solicitudes HTTP.
+- [ ] Compilar y ejecutar con Java 11.
 
 ### Entregables
 - Repositorio de código fuente: Un repo que construya un archivo JAR.
@@ -40,10 +40,10 @@ Crear un plugin de notificación en Java que permita:
 1. Configuración del Proyecto: 
     - [x] Configura el entorno de desarrollo con Java 11 y crear un nuevo proyecto Java. Usaré Maven o Gradle como herramienta de construcción.
 2. Estructura del Plugin:
-    - [ ] Definir la estructura del plugin basada en los ejemplos de los enlaces proporcionados.
+    - [x] Definir la estructura del plugin basada en los ejemplos de los enlaces proporcionados.
 3. Implementación de Funcionalidad:
-    - [ ] Utilizar una biblioteca externa para solicitudes HTTP (por ejemplo, Apache HttpClient, OkHttp).
-    - [ ] Implementar la lógica para manejar diferentes métodos HTTP, cuerpo y tipo de contenido.
+    - [x] Utilizar una biblioteca externa para solicitudes HTTP (por ejemplo, Apache HttpClient, OkHttp).
+    - [x] Implementar la lógica para manejar diferentes métodos HTTP, cuerpo y tipo de contenido.
 4. Pruebas:
     - [ ] Escribir pruebas unitarias para validar la funcionalidad del plugin.
 5. Documentación:
