@@ -1,18 +1,17 @@
 package com.beridevs.plugin;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
-import org.rundeck.app.spi.Services;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.dtolabs.rundeck.core.plugins.configuration.StringRenderingConstants;
 import com.beridevs.Constants.ContentType;
 import com.beridevs.Constants.HttpMethod;
 import com.beridevs.Services.HttpRequest;
 import com.dtolabs.rundeck.core.plugins.Plugin;
-import com.dtolabs.rundeck.core.plugins.configuration.DynamicProperties;
-import com.dtolabs.rundeck.core.plugins.configuration.StringRenderingConstants;
+import com.dtolabs.rundeck.plugins.ServiceNameConstants;
 import com.dtolabs.rundeck.plugins.descriptions.PluginDescription;
 import com.dtolabs.rundeck.plugins.descriptions.PluginProperty;
 import com.dtolabs.rundeck.plugins.descriptions.RenderingOption;
@@ -22,60 +21,50 @@ import com.dtolabs.rundeck.plugins.notification.NotificationPlugin;
 
 import okhttp3.OkHttpClient;
 
-@Plugin(service = "Notification", name = "httpNotificationPlugin")
-@PluginDescription(title = "HttpNotificationPlugin", description = "Notification plugin, to make flexible HTTP requests.")
-public class HttpNotificationPlugin
-        implements NotificationPlugin, DynamicProperties {
+@Plugin(name = HttpNotificationPlugin.SERVICE_PROVIDER_NAME, service = ServiceNameConstants.Notification)
+@PluginDescription(title = HttpNotificationPlugin.TITLE, description = HttpNotificationPlugin.DESCRIPTION)
+public class HttpNotificationPlugin implements NotificationPlugin {
+    private HttpRequest httpRequest;
+    static Logger logger = LoggerFactory.getLogger(HttpNotificationPlugin.class);
+
+    public static final String SERVICE_PROVIDER_NAME = "httpNotificationPlugin";
+    public static final String TITLE = "Http Notification Plugin";
+    public static final String DESCRIPTION = "Notification plugin, to make flexible HTTP requests.";
 
     @PluginProperty(title = "Http Method", description = "HTTP Method to use for the request", defaultValue = "GET", required = true)
-    @SelectValues(values = { "GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS" })
+    @SelectValues(values = { "GET", "POST", "PUT", "PATCH", "DELETE", "HEAD" })
     private String httpMethod;
 
     @PluginProperty(title = "URL", description = "URL to send the HTTP request to", required = true)
     private String url;
 
-    @PluginProperty(title = "Content Type", description = "Type of content in the request body", defaultValue = "text/plain", required = true)
-    @SelectValues(values = { "text/plain", "text/html", "text/css", "text/javascript", "application/javascript",
-            "application/json", "application/xml", "application/x-www-form-urlencoded", "multipart/form-data",
-            "application/octet-stream", "image/jpeg", "image/png", "image/gif", "audio/mpeg", "video/mp4",
-            "application/pdf", "application/zip", "application/gzip", "application/x-tar",
-            "application/x-rar-compressed", "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-powerpoint",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/vnd.ms-word",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/x-shockwave-flash",
-            "application/x-font-ttf", "application/x-font-otf" })
+    @PluginProperty(title = "Content Type", description = "Type of content in therequest body", defaultValue = "text/html", required = true)
+    @SelectValues(values = {
+            "text/plain", "text/html", "text/css",
+            "text/javascript", "application/javascript",
+            "application/json", "application/xml", "application/x-www-form-urlencoded",
+            "multipart/form-data", "image/jpeg", "image/png", "image/gif" })
     private String contentType;
 
-    @PluginProperty(title = "Body Content", description = "Content to include in the request body")
+    @PluginProperty(title = "Body Content", description = "Content to include inthe request body")
     @RenderingOptions({
             @RenderingOption(key = StringRenderingConstants.DISPLAY_TYPE_KEY, value = "CODE")
     })
     private String bodyContent;
 
+    public HttpNotificationPlugin() {
+    }
+
     public boolean postNotification(String trigger, Map executionData, Map config) {
         HttpMethod method = HttpMethod.valueOf(this.httpMethod);
         ContentType contentType = ContentType.fromString(this.contentType);
-        HttpRequest httpRequest = new HttpRequest(new OkHttpClient());
+        httpRequest = new HttpRequest(new OkHttpClient());
         try {
             httpRequest.request(method, url, contentType, bodyContent);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.printf("ERROR: %s\n", e);
+            return false;
         }
         return true;
-    }
-
-    @Override
-    public Map<String, Object> dynamicProperties(
-            final Map<String, Object> projectAndFrameworkValues,
-            Services services) {
-        Map<String, Object> list = new LinkedHashMap<>();
-
-        Map<String, String> fields = new TreeMap<>();
-        fields.put("test1", "atest");
-        fields.put("test2", "another");
-
-        list.put("customFields", fields);
-
-        return list;
     }
 }

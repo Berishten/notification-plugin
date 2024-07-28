@@ -19,16 +19,19 @@ public class HttpRequest {
     }
 
     public String request(HttpMethod httpMethod, String url, ContentType contentType, String body) throws IOException {
-        RequestBody requestBody = RequestBody.create(body, MediaType.parse(contentType.toString()));
+        RequestBody requestBody;
         Request.Builder requestBuilder = new Request.Builder().url(url);
 
         if (httpMethod.toString().equalsIgnoreCase(HttpMethod.GET.toString())) {
             requestBuilder.get();
         } else if (httpMethod.toString().equalsIgnoreCase(HttpMethod.POST.toString())) {
+            requestBody = RequestBody.create(MediaType.parse(contentType.toString()), body);
             requestBuilder.post(requestBody);
         } else if (httpMethod.toString().equalsIgnoreCase(HttpMethod.PUT.toString())) {
+            requestBody = RequestBody.create(MediaType.parse(contentType.toString()), body);
             requestBuilder.put(requestBody);
         } else if (httpMethod.toString().equalsIgnoreCase(HttpMethod.PATCH.toString())) {
+            requestBody = RequestBody.create(MediaType.parse(contentType.toString()), body);
             requestBuilder.delete(requestBody);
         } else if (httpMethod.toString().equalsIgnoreCase(HttpMethod.DELETE.toString())) {
             requestBuilder.delete();

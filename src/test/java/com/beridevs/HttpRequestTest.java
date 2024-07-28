@@ -50,7 +50,7 @@ public class HttpRequestTest {
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
                 .message("OK")
-                .body(ResponseBody.create(expectedResponse, MediaType.parse(ContentType.TEXT_PLAIN.toString())))
+                .body(ResponseBody.create(MediaType.parse(ContentType.TEXT_PLAIN.toString()), expectedResponse))
                 .build();
 
         when(mockClient.newCall(any(Request.class))).thenReturn(mockCall);
@@ -66,7 +66,7 @@ public class HttpRequestTest {
         String expectedResponse = "response body";
         Request request = new Request.Builder()
                 .url("https://example.com")
-                .post(RequestBody.create("{}", MediaType.parse("application/json")))
+                .post(RequestBody.create(MediaType.parse("application/json"), "{}"))
                 .build();
 
         mockResponse = new Response.Builder()
@@ -74,7 +74,7 @@ public class HttpRequestTest {
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
                 .message("OK")
-                .body(ResponseBody.create(expectedResponse, MediaType.parse(ContentType.APPLICATION_JSON.toString())))
+                .body(ResponseBody.create(MediaType.parse(ContentType.APPLICATION_JSON.toString()), expectedResponse))
                 .build();
 
         when(mockClient.newCall(any(Request.class))).thenReturn(mockCall);
@@ -98,7 +98,7 @@ public class HttpRequestTest {
                 .protocol(Protocol.HTTP_1_1)
                 .code(500)
                 .message("Internal Server Error")
-                .body(ResponseBody.create("", MediaType.parse(ContentType.TEXT_PLAIN.toString())))
+                .body(ResponseBody.create(MediaType.parse(ContentType.TEXT_PLAIN.toString()), ""))
                 .build();
 
         when(mockClient.newCall(any(Request.class))).thenReturn(mockCall);
