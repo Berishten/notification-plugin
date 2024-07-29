@@ -38,12 +38,12 @@ public class HttpNotificationPlugin implements NotificationPlugin {
     @PluginProperty(title = "URL", description = "URL to send the HTTP request to", required = true)
     private String url;
 
-    @PluginProperty(title = "Content Type", description = "Type of content in therequest body", defaultValue = "text/html", required = true)
+    @PluginProperty(title = "Content Type", description = "Type of content in the request body", defaultValue = "text/html", required = true)
     @SelectValues(values = {
             "text/plain", "text/html", "text/css",
             "text/javascript", "application/javascript",
             "application/json", "application/xml", "application/x-www-form-urlencoded",
-            "multipart/form-data", "image/jpeg", "image/png", "image/gif" })
+            "multipart/form-data", "application/octet-stream", "image/jpeg", "image/png", "image/gif" })
     private String contentType;
 
     @PluginProperty(title = "Body Content", description = "Content to include inthe request body")
